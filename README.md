@@ -1,2 +1,3 @@
 # OpenLMS
-An open source library management system built with React. 
+
+An open source library management system built with React.
