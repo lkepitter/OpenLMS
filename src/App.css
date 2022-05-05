@@ -1,38 +1,68 @@
+body {
+  background-color: rgb(224, 224, 224);
+}
 .App {
+  display: grid;
   text-align: center;
+  grid-template-columns: 99vw;
+  grid-template-rows: 10vh 5vh 85vh;
+  grid-template-areas:
+    "menu"
+    "submenu"
+    "display";
+  background-color: rgb(224, 224, 224);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.spell-viewer {
+  margin-top: 5%;
+  border: 1px solid black;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.search {
+  grid-area: search;
+  margin-top: 9%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.menu {
+  grid-area: menu;
+  margin-top: 9%;
+}
+
+.display {
+  grid-area: display;
+  border: 1px solid black;
+}
+
+/* .details {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-wrap: nowrap;
+  margin-left: 5%;
 }
 
-.App-link {
-  color: #61dafb;
+.detail {
+  padding: 5px;
+} */
+
+.descTitle {
+  font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h1 {
+  padding-bottom: 3%;
+  border-bottom: 1px solid black;
+}
+
+.detailButtons button {
+  filter: drop-shadow(0 0 1px grey);
+  background: rgb(211, 211, 210);
+  /*box-shadow: inset 1px 1px rgb(77, 77, 77);*/
+  box-shadow: inset 1px 1px 5px rgba(255, 255, 255, 0.6),
+    inset -1px -1px 5px rgba(119, 118, 118, 0.6);
+  font-weight: 700;
+  font-size: 14px;
+  font-family: fantasy;
+  border-radius: 15px;
+  padding: 4px;
+  margin-right: 4px;
+  margin-left: 4px;
 }

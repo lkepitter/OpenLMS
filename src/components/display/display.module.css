@@ -1,0 +1,251 @@
+.display {
+  border: 2px solid red;
+  display: grid;
+  text-align: center;
+  grid-template-columns: 20vw 30vw 30vw 20vw;
+  grid-template-rows: 40vh 20vh 40vh;
+  grid-template-areas:
+    "image info info2 category"
+    "genre desc desc category"
+    "copies copies copies keywords";
+  background-color: rgb(224, 224, 224);
+}
+
+.image {
+  width: 215px;
+  height: 332px;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-bottom: 0px;
+  cursor: pointer;
+}
+
+.info {
+  grid-area: info;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0%;
+  margin-top: 2%;
+  padding: 2%;
+  background-color: rgb(202, 202, 202);
+}
+
+.info2 {
+  grid-area: info2;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0%;
+  margin-top: 2%;
+  padding: 2%;
+  background-color: rgb(202, 202, 202);
+}
+
+.detail {
+  display: flex;
+  flex-direction: row;
+  margin-top: 2%;
+  margin-right: 10px;
+}
+
+.detailTitle {
+  font-weight: bold;
+  margin-right: 7px;
+  margin-left: 10px;
+}
+
+.description {
+  grid-area: desc;
+  display: flex;
+  margin-top: 3%;
+  border-top: 1px solid black;
+  text-align: justify;
+  background-color: rgb(202, 202, 202);
+}
+
+.genre {
+  grid-area: genre;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 2%;
+  padding: 2%;
+  background-color: rgb(202, 202, 202);
+}
+
+.copies {
+  grid-area: copies;
+  display: flex;
+  flex-direction: column;
+  margin-left: 2.5%;
+  margin-top: 3%;
+  border-top: 1px solid black;
+  text-align: justify;
+  background-color: rgb(202, 202, 202);
+}
+
+.copyRow {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid blue;
+}
+
+.category {
+  grid-area: category;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 2%;
+  padding: 2%;
+  background-color: rgb(202, 202, 202);
+}
+
+.keywords {
+  grid-area: keywords;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 2%;
+  padding: 2%;
+  background-color: rgb(202, 202, 202);
+}
+
+.header {
+  text-align: left;
+  display: flex;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+.modalContent {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+.modalClose {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.modalClose:hover,
+.modalClose:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.levelDisplay {
+  text-align: justify;
+  margin-left: 200px;
+}
+
+.name {
+  margin-top: 4%;
+  cursor: pointer;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: space-around; */
+}
+.name:hover {
+  /* border: 2px grey solid;
+  border-radius: 5px; */
+  text-decoration-line: underline;
+}
+
+.defences {
+  display: flex;
+  flex-direction: row;
+  margin-left: 5%;
+  margin-top: 2%;
+  padding: 2%;
+  text-align: center;
+  background-color: rgb(202, 202, 202);
+}
+
+.defenceTitle {
+  font-weight: bold;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+.defence {
+  font-size: larger;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.abilities {
+  display: flex;
+  text-align: justify;
+  background-color: rgb(202, 202, 202);
+}
+
+.ability {
+  margin-right: 2%;
+  text-align: center;
+  padding-left: 20%;
+  padding-right: 15%;
+  background-color: rgb(202, 202, 202);
+}
+
+.savingThrows {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20%;
+  background-color: rgb(202, 202, 202);
+  padding-left: 8%;
+  padding-right: 15%;
+  padding-bottom: 1%;
+  font-size: small;
+  text-align: center;
+}
+
+.saves {
+  display: flex;
+  /* margin-left: 20%;
+  padding-left: 5%;
+  padding-right: 6%; */
+  text-align: justify;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+
+.save {
+  text-align: center;
+  justify-content: space-evenly;
+  margin-left: 7%;
+  background-color: rgb(231, 231, 231);
+  padding: 2%;
+}
+.saveBonuses {
+  text-align: center;
+  justify-content: center;
+  margin-left: 7%;
+  background-color: rgb(231, 231, 231);
+  padding: 2%;
+  border: 1px solid black;
+}
+
+.mainHead {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 1%;
+}
