@@ -92,7 +92,7 @@ function Display({ book }) {
         </div>
 
         <div className={css.genre}>
-          <p className="desc">Genres</p>
+          <button className="desc">Genres +</button>
           {book.genre
             ? book.genre.map((item, index) => {
                 return (
@@ -151,7 +151,7 @@ function Display({ book }) {
           <p className="detailButtons"></p>
         </div>
         <div className={css.category}>
-          <p className="desc">Categories</p>
+          <button className="desc">Categories +</button>
           {book.genre
             ? book.categories.map((item, index) => {
                 return (
@@ -163,7 +163,7 @@ function Display({ book }) {
             : ""}
         </div>
         <div className={css.keywords}>
-          <p className="desc">Keywords/Tags</p>
+          <button className="desc">Keywords/Tags +</button>
           {book.genre
             ? book.keywords.map((item, index) => {
                 return (

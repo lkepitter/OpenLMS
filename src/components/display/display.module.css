@@ -47,6 +47,13 @@
   margin-top: 2%;
   margin-right: 10px;
 }
+.detail:hover,
+.description:hover {
+  /* text-decoration-line: underline; */
+  border: 2px grey solid;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
 .detailTitle {
   font-weight: bold;
@@ -154,19 +161,6 @@
 .levelDisplay {
   text-align: justify;
   margin-left: 200px;
-}
-
-.name {
-  margin-top: 4%;
-  cursor: pointer;
-  /* display: flex;
-  flex-direction: row;
-  justify-content: space-around; */
-}
-.name:hover {
-  /* border: 2px grey solid;
-  border-radius: 5px; */
-  text-decoration-line: underline;
 }
 
 .defences {
