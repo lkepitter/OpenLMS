@@ -1,8 +1,40 @@
 import css from "./display.module.css";
 import { useEffect, useState } from "react";
+import EditButton from "../editButton";
+import Modal from "../modal";
 
 function Display({ book }) {
+  const [editField, setEditField] = useState("Genre");
   //console.log("Displaying: ", book);
+  //let editField = "Genre";
+
+  function onEdit(editField) {
+    //Take in the field to edit
+    //Open relevant modal/change modal
+    switch (editField) {
+      case "Genre":
+        break;
+      case "Categories":
+        break;
+      case "Keywords/Tags":
+        break;
+      default:
+        break;
+    }
+    //display relevant modal
+    console.log("EditField ", editField);
+    const modal = document.getElementById(editField + "Modal");
+    console.log("Modal ", modal);
+    modal.style.display = "block";
+  }
+
+  function windowCloseModal(modal) {
+    window.onclick = function (event) {
+      if (event.target === modal) {
+        modal.style.display = "modal";
+      }
+    };
+  }
 
   return (
     <div className={"display"}>
@@ -13,32 +45,6 @@ function Display({ book }) {
             alt={book.name + "image"}
             className={css.image}
           ></img>
-          {/* <div id="nameModal" className={css.modal}>
-            <div className={css.modalContent}>
-              <span className={css.modalClose}>&times;</span>
-              <input
-                placeholder={character.name}
-                value={newName}
-                onChange={onNameInput}
-              ></input>
-              <button
-                onClick={() => {
-                  if (newName !== "") {
-                    onEdit("name", newName);
-                    setNewName("");
-                    const modal = document.getElementById("nameModal");
-                    modal.style.display = "none";
-                  } else {
-                    onEdit("name", "Nameless One");
-                    setNewName("Nameless One");
-                    const modal = document.getElementById("nameModal");
-                    modal.style.display = "none";
-                  }
-                }}
-              >
-                Confirm
-              </button>
-            </div> */}
         </div>
 
         <div className={css.info}>
@@ -91,8 +97,10 @@ function Display({ book }) {
           </div>
         </div>
 
+        <Modal editField={editField} />
+
         <div className={css.genre}>
-          <button className="desc">Genres +</button>
+          <EditButton editField="Genre" onEdit={onEdit} />{" "}
           {book.genre
             ? book.genre.map((item, index) => {
                 return (
@@ -151,7 +159,7 @@ function Display({ book }) {
           <p className="detailButtons"></p>
         </div>
         <div className={css.category}>
-          <button className="desc">Categories +</button>
+          <EditButton editField="Categories" onEdit={onEdit} />
           {book.genre
             ? book.categories.map((item, index) => {
                 return (
@@ -163,7 +171,7 @@ function Display({ book }) {
             : ""}
         </div>
         <div className={css.keywords}>
-          <button className="desc">Keywords/Tags +</button>
+          <EditButton editField="Keywords/Tags" onEdit={onEdit} />
           {book.genre
             ? book.keywords.map((item, index) => {
                 return (
