@@ -1,7 +1,7 @@
 import React from "react";
 import css from "./modal.module.css";
 
-function Modal({ editField }) {
+function Modal({ editField, loadedData }) {
   function closeModal() {
     const modal = document.getElementById(editField + "Modal");
     //console.log(modal);
@@ -10,15 +10,14 @@ function Modal({ editField }) {
     span.onclick = function () {
       modal.style.display = "none";
     };
+    window.onclick = function (event) {
+      console.log("Window clicked");
+      //const modal = document.getElementById(editField + "Modal");
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    };
   }
-
-  window.onclick = function (event) {
-    console.log("Window clicked");
-    const modal = document.getElementById(editField + "Modal");
-    if (event.target === modal) {
-      modal.style.display = "modal";
-    }
-  };
 
   return (
     <div id={`${editField}Modal`} className={css.modal} display="block">
@@ -27,6 +26,22 @@ function Modal({ editField }) {
           &times;
         </span>
         Hello! I am {editField}
+        <div className={css.current}>
+          List the current data for the field here.
+          {loadedData[editField]
+            ? loadedData[editField].map((item) => {
+                return <div key={item}>{item}</div>;
+              })
+            : ""}
+        </div>
+        <div className={css.add}>
+          List the data that can be added to the field here. (i.e. all possible
+          options in the database)
+          {/*allData[editField].map*/}
+        </div>
+        <button>Confirm</button>
+        <button>Cancel</button>
+        <button>Add New</button>
       </div>
     </div>
   );

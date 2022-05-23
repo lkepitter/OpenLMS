@@ -8,19 +8,22 @@ function Display({ book }) {
   //console.log("Displaying: ", book);
   //let editField = "Genre";
 
-  function onEdit(editField) {
-    //Take in the field to edit
-    //Open relevant modal/change modal
-    switch (editField) {
+  function onEdit(field) {
+    switch (field) {
       case "Genre":
+        field = "genre";
         break;
       case "Categories":
+        field = "categories";
         break;
       case "Keywords/Tags":
+        field = "keywords";
         break;
       default:
         break;
     }
+    //Take in the field to edit and change the state
+    setEditField(field);
     //display relevant modal
     console.log("EditField ", editField);
     const modal = document.getElementById(editField + "Modal");
@@ -97,7 +100,7 @@ function Display({ book }) {
           </div>
         </div>
 
-        <Modal editField={editField} />
+        <Modal editField={editField} loadedData={book} />
 
         <div className={css.genre}>
           <EditButton editField="Genre" onEdit={onEdit} />{" "}
