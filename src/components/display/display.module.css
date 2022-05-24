@@ -50,7 +50,8 @@
 .detail:hover,
 .description:hover {
   /* text-decoration-line: underline; */
-  border: 2px grey solid;
+  /*border: 2px grey solid;*/
+  background-color: grey;
   border-radius: 5px;
   cursor: pointer;
 }
