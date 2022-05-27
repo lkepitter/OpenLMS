@@ -1,4 +1,4 @@
-export const genres = [
+export const genre = [
   "Fantasy",
   "Science Fiction",
   "Thriller",
@@ -10,7 +10,7 @@ export const genres = [
   "Adventure",
   "Comedy/Humour",
 ];
-export const subGenres = [
+export const subGenre = [
   "Epic Fantasy",
   "High Fantasy",
   "Low Fantasy",

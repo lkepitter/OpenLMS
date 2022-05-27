@@ -4,7 +4,7 @@ export function convertPluralToSingular(plural) {
     console.log("Plural ends in 'ies'. Converting to 'y'.");
     return [...plural.slice(0, plural.length - 3), "y"].join("");
   }
-  //else assume it's an "s" and remove it
+  //else check if it's an "s" and remove it
   else if (plural[plural.length - 1] === "s") {
     console.log("Plural ends in 's'. Removing 's'.");
     return [...plural.slice(0, plural.length - 1)].join("");
