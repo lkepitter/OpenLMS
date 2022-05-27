@@ -3,10 +3,9 @@ import { useEffect, useState } from "react";
 import EditButton from "../editButton";
 import Modal from "../modal";
 
-function Display({ book }) {
-  const [editField, setEditField] = useState("Genre");
-  //console.log("Displaying: ", book);
-  //let editField = "Genre";
+function Display({ book, updateBook }) {
+  const [editField, setEditField] = useState("Genre"); //current field to display for editing
+  const [addToField, setAddToField] = useState([]); //list of items to add to the editing field
 
   function onEdit(field) {
     switch (field) {
@@ -26,17 +25,10 @@ function Display({ book }) {
     setEditField(field);
     //display relevant modal
     console.log("EditField ", editField);
+    setAddToField([...book[field]]);
     const modal = document.getElementById(editField + "Modal");
     console.log("Modal ", modal);
     modal.style.display = "block";
-  }
-
-  function windowCloseModal(modal) {
-    window.onclick = function (event) {
-      if (event.target === modal) {
-        modal.style.display = "modal";
-      }
-    };
   }
 
   return (
@@ -100,7 +92,13 @@ function Display({ book }) {
           </div>
         </div>
 
-        <Modal editField={editField} loadedData={book} />
+        <Modal
+          editField={editField}
+          loadedData={book}
+          addToField={addToField}
+          setAddToField={setAddToField}
+          updateBook={updateBook}
+        />
 
         <div className={css.genre}>
           <EditButton editField="Genre" onEdit={onEdit} />{" "}

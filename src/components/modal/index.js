@@ -1,14 +1,20 @@
-import React from "react";
+// import React, { useState } from "react";
 import css from "./modal.module.css";
 import * as allData from "../../data/bookFields.js";
 import { convertPluralToSingular } from "../../utilities/functions.js";
 
-function Modal({ editField, loadedData }) {
+function Modal({
+  editField,
+  loadedData,
+  addToField,
+  setAddToField,
+  updateBook,
+}) {
   function closeModal() {
     const modal = document.getElementById(editField + "Modal");
-    //console.log(modal);
     const span = document.getElementsByClassName(css.modalClose)[0];
-    // When the user clicks on <span> (x), close the modal
+    const button = document.getElementById("modalCancel");
+    // When the user clicks on <span> (x), click outside modal or click cancel button, close the modal
     span.onclick = function () {
       modal.style.display = "none";
     };
@@ -18,17 +24,28 @@ function Modal({ editField, loadedData }) {
         modal.style.display = "none";
       }
     };
+    button.onclick = function () {
+      modal.style.display = "none";
+    };
   }
 
-  let addToField = loadedData[editField] ? [...loadedData[editField]] : []; //This is a temporary variable for field editing. Will need state later.
-  console.log("addToField:", addToField);
   function removeFrom(state, toRemove) {
-    state = [
-      ...state.slice(0, state.indexOf(toRemove - 1)),
-      ...state.slice(state.indexOf(toRemove + 1)),
-    ];
-    console.log("State is now: ", state);
     console.log("index: ", state.indexOf(toRemove));
+    const index = state.indexOf(toRemove);
+    console.log(`Removed ${toRemove} from ${editField}`);
+    console.log("State is now: ", [
+      ...state.slice(0, index),
+      ...state.slice(index + 1),
+    ]);
+    setAddToField([...state.slice(0, index), ...state.slice(index + 1)]);
+  }
+  function addTo(state, toAdd) {
+    //only add if it's nor already on the list
+    if (!state.includes(toAdd)) {
+      console.log(`Added ${toAdd} to ${editField}`);
+      console.log("State is now: ", [...state, toAdd]);
+      setAddToField([...state, toAdd]);
+    }
   }
 
   //Convert the editField into a title
@@ -51,15 +68,12 @@ function Modal({ editField, loadedData }) {
           <br></br>
           <br></br>
           {loadedData[editField]
-            ? loadedData[editField].map((item) => {
+            ? addToField.map((item) => {
                 return (
                   <div
                     className={css.fieldItem}
                     onClick={() => {
                       removeFrom(addToField, item);
-                      console.log(
-                        `Removed ${item} from ${editField}`
-                      ); /*click me to remove data from update state.*/
                     }}
                   >
                     <div key={item}>{item}</div>
@@ -79,9 +93,7 @@ function Modal({ editField, loadedData }) {
                   <div
                     className={css.fieldItem}
                     onClick={() => {
-                      console.log(
-                        `Added ${item} to ${editField}`
-                      ); /*click me to add data to update state.*/
+                      addTo(addToField, item);
                     }}
                   >
                     <div key={item}>{item}</div>
@@ -95,9 +107,7 @@ function Modal({ editField, loadedData }) {
                   <div
                     className={css.fieldItem}
                     onClick={() => {
-                      console.log(
-                        `Added ${item} to ${editField}`
-                      ); /*click me to add data to update state.*/
+                      addTo(addToField, item);
                     }}
                   >
                     <div key={item}>{item}</div>
@@ -110,15 +120,12 @@ function Modal({ editField, loadedData }) {
           <button
             onClick={() => {
               /*Update book data with update state when confirm clicked.*/
+              updateBook(editField, addToField);
             }}
           >
             Confirm
           </button>
-          <button
-            onClick={() => {
-              /*Reset update field state.*/
-            }}
-          >
+          <button onClick={() => closeModal()} id={"modalCancel"}>
             Cancel
           </button>
         </div>
