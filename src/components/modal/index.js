@@ -8,25 +8,20 @@ function Modal({
   loadedData,
   addToField,
   setAddToField,
-  updateBook,
+  book,
+  books,
+  setBook,
 }) {
-  function closeModal() {
-    const modal = document.getElementById(editField + "Modal");
-    const span = document.getElementsByClassName(css.modalClose)[0];
-    const button = document.getElementById("modalCancel");
-    // When the user clicks on <span> (x), click outside modal or click cancel button, close the modal
-    span.onclick = function () {
-      modal.style.display = "none";
-    };
-    window.onclick = function (event) {
-      console.log("Window clicked");
-      if (event.target === modal) {
-        modal.style.display = "none";
-      }
-    };
-    button.onclick = function () {
-      modal.style.display = "none";
-    };
+  //function to update books data
+  function updateBook(inField, withData) {
+    //update the original data
+    const bookIndex = books.findIndex(
+      (current) => current.refId === book.refId
+    );
+    console.log("Updating", books[bookIndex][inField], "with", withData);
+    books[bookIndex][inField] = withData;
+    //change the state to update the display
+    setBook(books[bookIndex]);
   }
 
   function removeFrom(state, toRemove) {
@@ -46,6 +41,25 @@ function Modal({
       console.log("State is now: ", [...state, toAdd]);
       setAddToField([...state, toAdd]);
     }
+  }
+
+  function closeModal(buttonId) {
+    const modal = document.getElementById(editField + "Modal");
+    //const span = document.getElementsByClassName(css.modalClose)[0]
+    const button = document.getElementById(buttonId);
+    // When the user clicks on <span> (x), click outside modal or click cancel button, close the modal
+    // span.onclick = function () {
+    //   modal.style.display = "none";
+    // };
+    window.onclick = function (event) {
+      console.log("Window clicked");
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    };
+    button.onclick = function () {
+      modal.style.display = "none";
+    };
   }
 
   //Convert the editField into a title
@@ -118,14 +132,19 @@ function Modal({
         </div>
         <div className={css.currentFoot}>
           <button
+            id={"modalConfirm"}
             onClick={() => {
               /*Update book data with update state when confirm clicked.*/
+              books[
+                books.findIndex((current) => current.refId === book.refId)
+              ] = { ...book, [editField]: addToField };
               updateBook(editField, addToField);
+              closeModal("modalConfirm");
             }}
           >
             Confirm
           </button>
-          <button onClick={() => closeModal()} id={"modalCancel"}>
+          <button onClick={() => closeModal("modalCancel")} id={"modalCancel"}>
             Cancel
           </button>
         </div>

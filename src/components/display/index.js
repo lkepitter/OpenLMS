@@ -2,10 +2,14 @@ import css from "./display.module.css";
 import { useEffect, useState } from "react";
 import EditButton from "../editButton";
 import Modal from "../modal";
+import { books } from "../../data/books";
 
-function Display({ book, updateBook }) {
+function Display() {
   const [editField, setEditField] = useState("Genre"); //current field to display for editing
   const [addToField, setAddToField] = useState([]); //list of items to add to the editing field
+  const [book, setBook] = useState(books[1]);
+  const [modal, setModal] = useState("genreModal");
+  //const book = loadedBook;
 
   function onEdit(field) {
     switch (field) {
@@ -95,9 +99,13 @@ function Display({ book, updateBook }) {
         <Modal
           editField={editField}
           loadedData={book}
+          book={book}
+          setBook={setBook}
+          books={books}
           addToField={addToField}
           setAddToField={setAddToField}
-          updateBook={updateBook}
+          //closeModal={closeModal}
+          //updateBook={updateBook}
         />
 
         <div className={css.genre}>
