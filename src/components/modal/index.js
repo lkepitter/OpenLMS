@@ -1,6 +1,14 @@
 // import React, { useState } from "react";
 import css from "./modal.module.css";
 import * as allData from "../../data/bookFields.js";
+import {
+  genre,
+  subGenre,
+  fictionTag,
+  authorTag,
+  categories,
+  keywords,
+} from "../../data/bookFields.js";
 import { convertPluralToSingular } from "../../utilities/functions.js";
 
 function Modal({
@@ -11,6 +19,8 @@ function Modal({
   book,
   books,
   setBook,
+  setFieldInput,
+  fieldInput,
 }) {
   //function to update books data
   function updateBook(inField, withData) {
@@ -60,6 +70,24 @@ function Modal({
     button.onclick = function () {
       modal.style.display = "none";
     };
+  }
+
+  function onInput(event) {
+    setFieldInput(event.target.value);
+    console.log("New field entry is: ", event.target.value);
+  }
+
+  function confirmInput(input, field) {
+    //check it's an appropriate number
+    //convert input to a number and check it's not NaN
+    if (input === "") {
+      return;
+    } else {
+      console.log([...allData[field], input]);
+      allData[field] = [...allData[field], input]; //this doesn't work because of a type error. console log is fine, but setting it this way breaks.
+      setFieldInput("");
+      //set state to update field list
+    }
   }
 
   //Convert the editField into a title
@@ -149,7 +177,18 @@ function Modal({
           </button>
         </div>
         <div className={css.addFoot}>
-          <button>Create New</button>
+          <input
+            // placeholder={loadedData[editField]}
+            value={fieldInput}
+            onChange={onInput}
+          ></input>
+          <button
+            onClick={() => {
+              confirmInput(fieldInput, editField);
+            }}
+          >
+            Create New
+          </button>
         </div>
       </div>
     </div>
