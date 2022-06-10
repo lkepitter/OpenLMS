@@ -47,6 +47,14 @@
   margin-top: 2%;
   margin-right: 10px;
 }
+.detail:hover,
+.description:hover {
+  /* text-decoration-line: underline; */
+  /*border: 2px grey solid;*/
+  background-color: grey;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
 .detailTitle {
   font-weight: bold;
@@ -61,6 +69,7 @@
   border-top: 1px solid black;
   text-align: justify;
   background-color: rgb(202, 202, 202);
+  overflow: auto;
 }
 
 .genre {
@@ -72,6 +81,10 @@
   margin-top: 2%;
   padding: 2%;
   background-color: rgb(202, 202, 202);
+  overflow: auto;
+}
+.list {
+  overflow: auto;
 }
 
 .copies {
@@ -83,6 +96,7 @@
   border-top: 1px solid black;
   text-align: justify;
   background-color: rgb(202, 202, 202);
+  overflow: auto;
 }
 
 .copyRow {
@@ -100,6 +114,7 @@
   margin-top: 2%;
   padding: 2%;
   background-color: rgb(202, 202, 202);
+  overflow: auto;
 }
 
 .keywords {
@@ -111,6 +126,7 @@
   margin-top: 2%;
   padding: 2%;
   background-color: rgb(202, 202, 202);
+  overflow: auto;
 }
 
 .header {
@@ -149,97 +165,6 @@
   color: black;
   text-decoration: none;
   cursor: pointer;
-}
-
-.levelDisplay {
-  text-align: justify;
-  margin-left: 200px;
-}
-
-.name {
-  margin-top: 4%;
-  cursor: pointer;
-  /* display: flex;
-  flex-direction: row;
-  justify-content: space-around; */
-}
-.name:hover {
-  /* border: 2px grey solid;
-  border-radius: 5px; */
-  text-decoration-line: underline;
-}
-
-.defences {
-  display: flex;
-  flex-direction: row;
-  margin-left: 5%;
-  margin-top: 2%;
-  padding: 2%;
-  text-align: center;
-  background-color: rgb(202, 202, 202);
-}
-
-.defenceTitle {
-  font-weight: bold;
-  margin-top: 5%;
-  margin-bottom: 5%;
-}
-.defence {
-  font-size: larger;
-  margin-top: 5%;
-  margin-bottom: 5%;
-}
-
-.abilities {
-  display: flex;
-  text-align: justify;
-  background-color: rgb(202, 202, 202);
-}
-
-.ability {
-  margin-right: 2%;
-  text-align: center;
-  padding-left: 20%;
-  padding-right: 15%;
-  background-color: rgb(202, 202, 202);
-}
-
-.savingThrows {
-  display: flex;
-  flex-direction: column;
-  margin-left: 20%;
-  background-color: rgb(202, 202, 202);
-  padding-left: 8%;
-  padding-right: 15%;
-  padding-bottom: 1%;
-  font-size: small;
-  text-align: center;
-}
-
-.saves {
-  display: flex;
-  /* margin-left: 20%;
-  padding-left: 5%;
-  padding-right: 6%; */
-  text-align: justify;
-  justify-content: space-evenly;
-  flex-direction: row;
-}
-
-.save {
-  text-align: center;
-  justify-content: space-evenly;
-  margin-left: 7%;
-  background-color: rgb(231, 231, 231);
-  padding: 2%;
-}
-.saveBonuses {
-  text-align: center;
-  justify-content: center;
-  margin-left: 7%;
-  background-color: rgb(231, 231, 231);
-  padding: 2%;
-  border: 1px solid black;
 }
 
 .mainHead {

@@ -1,8 +1,41 @@
 import css from "./display.module.css";
 import { useEffect, useState } from "react";
+import EditButton from "../editButton";
+import TextEditButton from "../textEditButton";
+import Modal from "../modal";
+import { books } from "../../data/books";
 
-function Display({ book }) {
-  //console.log("Displaying: ", book);
+function Display() {
+  const [editField, setEditField] = useState("Genre"); //current field to display for editing
+  const [addToField, setAddToField] = useState([]); //list of items to add to the editing field
+  const [book, setBook] = useState(books[1]);
+  const [modal, setModal] = useState("genreModal");
+  const [fieldInput, setFieldInput] = useState("");
+  //const book = loadedBook;
+
+  function onEdit(field) {
+    switch (field) {
+      case "Genre":
+        field = "genre";
+        break;
+      case "Categories":
+        field = "categories";
+        break;
+      case "Keywords/Tags":
+        field = "keywords";
+        break;
+      default:
+        break;
+    }
+    //Take in the field to edit and change the state
+    setEditField(field);
+    //display relevant modal
+    console.log("EditField ", editField);
+    setAddToField([...book[field]]);
+    const modal = document.getElementById(editField + "Modal");
+    console.log("Modal ", modal);
+    modal.style.display = "block";
+  }
 
   return (
     <div className={"display"}>
@@ -13,49 +46,17 @@ function Display({ book }) {
             alt={book.name + "image"}
             className={css.image}
           ></img>
-          {/* <div id="nameModal" className={css.modal}>
-            <div className={css.modalContent}>
-              <span className={css.modalClose}>&times;</span>
-              <input
-                placeholder={character.name}
-                value={newName}
-                onChange={onNameInput}
-              ></input>
-              <button
-                onClick={() => {
-                  if (newName !== "") {
-                    onEdit("name", newName);
-                    setNewName("");
-                    const modal = document.getElementById("nameModal");
-                    modal.style.display = "none";
-                  } else {
-                    onEdit("name", "Nameless One");
-                    setNewName("Nameless One");
-                    const modal = document.getElementById("nameModal");
-                    modal.style.display = "none";
-                  }
-                }}
-              >
-                Confirm
-              </button>
-            </div> */}
         </div>
 
         <div className={css.info}>
-          <div className={css.detail}>
-            <p className={css.detailTitle}>Name</p>
-            <p className="detail">{book.name}</p>
-          </div>
+          <TextEditButton editField="Name" onEdit={onEdit} loadedData={book} />
           <div className={css.detail}>
             <p className={css.detailTitle}>Author</p>
             <p className="detail">
               {book.author[0].firstname} {book.author[0].lastname}
             </p>
           </div>
-          <div className={css.detail}>
-            <p className={css.detailTitle}>ISBN</p>
-            <p className="detail"> {book.isbn}</p>
-          </div>
+          <TextEditButton editField="ISBN" onEdit={onEdit} loadedData={book} />
           <div className={css.detail}>
             <p className={css.detailTitle}>Fiction/Non-fiction</p>
             <p className="detail">{book.fiction ? "Fiction" : "Non-fiction"}</p>
@@ -69,39 +70,53 @@ function Display({ book }) {
         </div>
 
         <div className={css.info2}>
-          <div className={css.detail}>
-            <p className={css.detailTitle}>Publisher</p>
-            <p className="detail">{book.publisher}</p>
-          </div>
-          <div className={css.detail}>
-            <p className={css.detailTitle}>Location</p>
-            <p className="detail">{book.publocation}</p>
-          </div>
-          <div className={css.detail}>
-            <p className={css.detailTitle}>Year</p>
-            <p className="detail"> {book.pubyear}</p>
-          </div>
-          <div className={css.detail}>
-            <p className={css.detailTitle}>Edition</p>
-            <p className="detail">{book.edition}</p>
-          </div>
+          <TextEditButton
+            editField="Publisher"
+            onEdit={onEdit}
+            loadedData={book}
+          />
+          <TextEditButton
+            editField="Location"
+            onEdit={onEdit}
+            loadedData={book}
+          />
+          <TextEditButton editField="Year" onEdit={onEdit} loadedData={book} />
+          <TextEditButton
+            editField="Edition"
+            onEdit={onEdit}
+            loadedData={book}
+          />
           <div className={css.detail}>
             <p className={css.detailTitle}>Added</p>
             <p className="detail">Insert date automatically</p>
           </div>
         </div>
 
+        <Modal
+          editField={editField}
+          loadedData={book}
+          book={book}
+          setBook={setBook}
+          books={books}
+          addToField={addToField}
+          setAddToField={setAddToField}
+          fieldInput={fieldInput}
+          setFieldInput={setFieldInput}
+        />
+
         <div className={css.genre}>
-          <p className="desc">Genres</p>
-          {book.genre
-            ? book.genre.map((item, index) => {
-                return (
-                  <div key={index + 1}>
-                    <p>{item}</p>
-                  </div>
-                );
-              })
-            : ""}
+          <EditButton editField="Genre" onEdit={onEdit} />{" "}
+          <div className={css.list}>
+            {book.genre
+              ? book.genre.map((item, index) => {
+                  return (
+                    <div key={index + 1}>
+                      <p>{item}</p>
+                    </div>
+                  );
+                })
+              : ""}
+          </div>
         </div>
 
         <div className={css.description}>
@@ -151,28 +166,32 @@ function Display({ book }) {
           <p className="detailButtons"></p>
         </div>
         <div className={css.category}>
-          <p className="desc">Categories</p>
-          {book.genre
-            ? book.categories.map((item, index) => {
-                return (
-                  <div key={index + 1}>
-                    <p>{item}</p>
-                  </div>
-                );
-              })
-            : ""}
+          <EditButton editField="Categories" onEdit={onEdit} />
+          <div className={css.list}>
+            {book.genre
+              ? book.categories.map((item, index) => {
+                  return (
+                    <div key={index + 1}>
+                      <p>{item}</p>
+                    </div>
+                  );
+                })
+              : ""}
+          </div>
         </div>
         <div className={css.keywords}>
-          <p className="desc">Keywords/Tags</p>
-          {book.genre
-            ? book.keywords.map((item, index) => {
-                return (
-                  <div key={index + 1}>
-                    <p>{item}</p>
-                  </div>
-                );
-              })
-            : ""}
+          <div className={css.list}>
+            <EditButton editField="Keywords/Tags" onEdit={onEdit} />
+            {book.genre
+              ? book.keywords.map((item, index) => {
+                  return (
+                    <div key={index + 1}>
+                      <p>{item}</p>
+                    </div>
+                  );
+                })
+              : ""}
+          </div>
         </div>
       </div>
     </div>
