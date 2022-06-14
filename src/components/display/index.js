@@ -2,6 +2,7 @@ import css from "./display.module.css";
 import { useEffect, useState } from "react";
 import EditButton from "../editButton";
 import TextEditButton from "../textEditButton";
+import LongTextEditButton from "../longTextEditButton";
 import Modal from "../modal";
 import { books } from "../../data/books";
 
@@ -119,9 +120,16 @@ function Display() {
           </div>
         </div>
 
-        <div className={css.description}>
+        {/* <div className={css.description}>
           <p className="desc">{book.description}</p>
           <p className="detailButtons"></p>
+        </div> */}
+        <div className={css.description}>
+          <LongTextEditButton
+            editField="Description"
+            onEdit={onEdit}
+            loadedData={book}
+          />
         </div>
 
         <div className={css.copies}>

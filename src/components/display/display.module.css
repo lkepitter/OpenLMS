@@ -47,8 +47,7 @@
   margin-top: 2%;
   margin-right: 10px;
 }
-.detail:hover,
-.description:hover {
+.detail:hover {
   /* text-decoration-line: underline; */
   /*border: 2px grey solid;*/
   background-color: grey;
@@ -69,7 +68,6 @@
   border-top: 1px solid black;
   text-align: justify;
   background-color: rgb(202, 202, 202);
-  overflow: auto;
 }
 
 .genre {

@@ -35,6 +35,26 @@
   font-size: 28px;
   font-weight: bold;
 }
+.modalContentText {
+  background-color: #fefefe;
+  text-align: center;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+  height: 20%;
+}
+
+.modalContentLongText {
+  background-color: #fefefe;
+  text-align: center;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+  height: 50%;
+}
+
 .modalClose:hover,
 .modalClose:focus {
   color: black;
@@ -65,8 +85,23 @@
   grid-area: modalHead;
   border: 1px solid yellow;
 }
+.fieldItemText {
+  margin: 20px;
+}
 
 .fieldItem:hover {
   background-color: grey;
   cursor: pointer;
+}
+
+.textArea {
+  width: 100%;
+  height: 90%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: none;
+  overflow: auto;
+  font: inherit;
 }
