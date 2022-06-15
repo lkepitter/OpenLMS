@@ -44,3 +44,7 @@ export const authorTag = [
 ];
 export const categories = ["Popular", "LGBTQ", "Hugo Award Nominee 2020"];
 export const keywords = ["LGBTQ", "horror", "mystery", "epic", "high fantasy"];
+export const publisher = ["Tor", "Orbit"];
+export const publocation = ["London", "New York"];
+
+export const textMultipleChoiceField = ["publisher", "publocation"];

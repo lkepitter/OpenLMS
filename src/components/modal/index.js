@@ -8,6 +8,7 @@ import {
   authorTag,
   categories,
   keywords,
+  textMultipleChoiceField,
 } from "../../data/bookFields.js";
 import { convertPluralToSingular } from "../../utilities/functions.js";
 
@@ -33,7 +34,10 @@ function Modal({
     //change the state to update the display
     setBook(books[bookIndex]);
   }
-
+  console.log(
+    "HELLO",
+    `${editField} is ${textMultipleChoiceField.includes(editField)} `
+  );
   function removeFrom(state, toRemove) {
     console.log("index: ", state.indexOf(toRemove));
     const index = state.indexOf(toRemove);
@@ -144,7 +148,8 @@ function Modal({
             </div>
           </div>
         </div>
-      ) : typeof loadedData[editField] === "string" ? (
+      ) : typeof loadedData[editField] === "string" &&
+        !textMultipleChoiceField.includes(editField) ? (
         <div className={css.modalContentText}>
           {/*Text type edit */}
           <div className={css.modalHead}>
@@ -189,6 +194,98 @@ function Modal({
               id={"modalCancel"}
             >
               Cancel
+            </button>
+          </div>
+        </div>
+      ) : textMultipleChoiceField.includes(editField) ? (
+        <div className={css.modalContent}>
+          <div className={css.modalHead}>
+            <span className={css.modalClose} onClick={() => closeModal()}>
+              &times;
+            </span>
+            {fieldTitle}
+          </div>
+          <div className={css.current}>
+            Below are all {editField} associated with this book. Click on one to
+            remove it.
+            <br></br>
+            <br></br>
+            <div
+              className={css.fieldItem}
+              onClick={() => {
+                removeFrom(addToField, loadedData[editField]);
+              }}
+            >
+              <div key={loadedData[editField]}>{loadedData[editField]}</div>
+            </div>
+          </div>
+          <div className={css.add}>
+            Click on a {fieldSingular} from the list below to add it to the
+            current book.
+            <br></br>
+            <br></br>
+            {allData[editField]
+              ? allData[editField].map((item) => {
+                  return (
+                    <div
+                      className={css.fieldItem}
+                      onClick={() => {
+                        addTo(addToField, item);
+                      }}
+                    >
+                      <div key={item}>{item}</div>
+                    </div>
+                  );
+                })
+              : ""}
+            {allData[editField] && editField === "genre"
+              ? allData["subGenre"].map((item) => {
+                  return (
+                    <div
+                      className={css.fieldItem}
+                      onClick={() => {
+                        addTo(addToField, item);
+                      }}
+                    >
+                      <div key={item}>{item}</div>
+                    </div>
+                  );
+                })
+              : ""}
+          </div>
+          <div className={css.currentFoot}>
+            <button
+              id={"modalConfirm"}
+              onClick={() => {
+                /*Update book data with update state when confirm clicked.*/
+                books[
+                  books.findIndex((current) => current.refId === book.refId)
+                ] = { ...book, [editField]: addToField };
+                updateBook(editField, addToField);
+                closeModal("modalConfirm");
+              }}
+            >
+              Confirm
+            </button>
+            <button
+              onClick={() => closeModal("modalCancel")}
+              id={"modalCancel"}
+            >
+              Cancel
+            </button>
+          </div>
+          <div className={css.addFoot}>
+            <input
+              // placeholder={loadedData[editField]}
+              value={fieldInput}
+              onChange={onInput}
+            ></input>
+            <button
+              onClick={() => {
+                confirmInput(fieldInput, editField);
+              }}
+            >
+              Create New
             </button>
           </div>
         </div>
